@@ -23,11 +23,7 @@ export class EditorComponent extends React.Component<Props, State> {
   //https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName
   //https://facebook.github.io/react/docs/refs-and-the-dom.html
   // offset, pending IE fix
-  insertAtCaret(areaId, text, offsetCursor = 0) {
-      var txtarea = this.textarea;
-  		//var txtarea = document.getElementById(areaId);
-  		if (!txtarea) { return; }
-
+  insertAtCaret(txtarea : HTMLElement, text, offsetCursor = 0) {
   		var scrollPos = txtarea.scrollTop;
   		var strPos = 0;
   		var br = ((txtarea['selectionStart'] || txtarea['selectionStart'] == '0') ?
@@ -63,7 +59,7 @@ export class EditorComponent extends React.Component<Props, State> {
 
   onBoldText(event) {
     event.preventDefault();
-    this.insertAtCaret('editor-viewer-text-area', '**', 1)
+    this.insertAtCaret(this.textarea, '**', 1)
   }
 
   onTextareaChange(event) {
