@@ -11,6 +11,8 @@ interface State {
 
 export class EditorComponent extends React.Component<Props, State> {
 
+  textarea : any;
+
   constructor(props: Props) {
     super(props);
 
@@ -18,9 +20,12 @@ export class EditorComponent extends React.Component<Props, State> {
   }
 
   //http://stackoverflow.com/questions/1064089/inserting-a-text-where-cursor-is-using-javascript-jquery
+  //https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName
+  //https://facebook.github.io/react/docs/refs-and-the-dom.html
   // offset, pending IE fix
   insertAtCaret(areaId, text, offsetCursor = 0) {
-  		var txtarea = document.getElementById(areaId);
+      var txtarea = this.textarea;
+  		//var txtarea = document.getElementById(areaId);
   		if (!txtarea) { return; }
 
   		var scrollPos = txtarea.scrollTop;
@@ -79,7 +84,9 @@ export class EditorComponent extends React.Component<Props, State> {
            <textarea
              id="editor-viewer-text-area"
              className='editor--textarea-size'
-             onChange={this.onTextareaChange.bind(this)}>
+             onChange={this.onTextareaChange.bind(this)}
+             ref={(textarea) => { this.textarea = textarea; }}
+             >
              {this.state.content}
            </textarea>
          </div>
