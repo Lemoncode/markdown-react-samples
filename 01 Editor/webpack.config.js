@@ -12,7 +12,8 @@ module.exports = {
 
   entry: [
     './main.tsx',
-    '../node_modules/bootstrap/dist/css/bootstrap.css'
+    '../node_modules/bootstrap/dist/css/bootstrap.css',
+    './style.css'
   ],
   output: {
     path: path.join(basePath, 'dist'),
@@ -62,7 +63,7 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
-      }      
+      }
     ]
   },
   plugins: [
