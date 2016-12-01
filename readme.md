@@ -3,7 +3,7 @@
 # Markdown samples
 
 Set of typescript based samples for the markdown-react-js library
-https://github.com/alexkuz/markdown-react-js
+https://www.npmjs.com/package/markdown-to-react-components
 
 - 00 viewer: just display some harcoded markdown.
 - 01 editor: display editor and viewer in the same page.
