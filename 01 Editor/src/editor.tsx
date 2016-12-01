@@ -28,7 +28,9 @@ export class EditorComponent extends React.Component<Props, State> {
     return (
       <div>
            <div>{this.state.content}</div>
-           <textarea onChange={this.onTextareaChange.bind(this)}/>
+           <textarea onChange={this.onTextareaChange.bind(this)}>
+           {this.state.content}
+           </textarea>
       </div>
     )
   }
