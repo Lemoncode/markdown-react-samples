@@ -26,18 +26,18 @@ export class EditorComponent extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="container-fluid">
-           <div className='row'>
-            <div className='col-xs-6 editor--textarea-border'>
-              {this.state.content}
-            </div>
-            <div className='col-xs-6'>
-              <textarea onChange={this.onTextareaChange.bind(this)}>
-                {this.state.content}
-              </textarea>
-            </div>
-           </div>
-      </div>
+       <div className='editor--container-flex'>
+        <div className='editor--viewer-border editor--viewer-container'>
+          {this.state.content}
+        </div>
+        <div className="editor--edit-container">
+          <textarea
+            className='editor--textarea-size'
+            onChange={this.onTextareaChange.bind(this)}>
+            {this.state.content}
+          </textarea>
+        </div>
+       </div>
     )
   }
 }
