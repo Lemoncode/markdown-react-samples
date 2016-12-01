@@ -26,6 +26,7 @@ module.exports = {
        inline: true, //Enable watch and live reload
        host: 'localhost',
        port: 8080,
+       noInfo: true,
        stats: 'errors-only'
   },
 
@@ -57,7 +58,11 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=image/svg+xml'
-      }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      }      
     ]
   },
   plugins: [
