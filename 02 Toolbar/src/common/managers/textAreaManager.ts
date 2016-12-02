@@ -3,19 +3,18 @@
 class TextAreaManager {
   insertAtCaret(textArea: HTMLTextAreaElement, caret: string, offsetCursor : number = 0) {
 
-    this.insertCaretBetweenSelectedText(textArea, caret);
-    //TODO: Implement getPosition
-    const position = 1;
+    const position = this.insertCaretBetweenSelectedText(textArea, caret);
     this.placeCursor(textArea, position, offsetCursor);
   }
 
-  private insertCaretBetweenSelectedText(textArea : HTMLTextAreaElement, caret: string) : void {
+  private insertCaretBetweenSelectedText(textArea : HTMLTextAreaElement, caret: string) : number {
     const beforeText = this.getTextBeforeSelectedText(textArea);
     const selectedText = this.getSelectedText(textArea);
     const afterText = this.getTextAfterSelectedText(textArea);
 
     textArea.value = beforeText + caret + selectedText + caret + afterText;
-    // return (position + caret.length + 1);
+    //TODO: Calculate outside this method
+    return (textArea.selectionStart + caret.length + 1);
   }
 
   private getTextBeforeSelectedText(textArea: HTMLTextAreaElement): string {
