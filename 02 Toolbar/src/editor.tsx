@@ -23,9 +23,22 @@ export class EditorComponent extends React.Component<Props, State> {
   //https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName
   //https://facebook.github.io/react/docs/refs-and-the-dom.html
   // offset, pending IE fix
+  // TODO: Refactor, clean code this
+  // Proposal
+  //
+  // insertAtCaret(txtArea: HMLElement, text: string, offsetCursor = 0) {
+  //  const scrollPos : number = txtarea.scrollTop;
+  //  let strPos : number = 0;
+  //
+  //  strPos = calculateTextAreaCurrentCursorPosition(txtarea);
+  //  insertText(txtArea, strPos, text);
+  //  placeCursor(txtArea, strPos, offset);
+  // }
   insertAtCaret(txtarea : HTMLElement, text, offsetCursor = 0) {
   		var scrollPos = txtarea.scrollTop;
   		var strPos = 0;
+      // TODO: this "ie" flag seems to be for old Internet explorer versions
+      // if it's above 11 it fallbacks into "ff" we can simplify this
   		var br = ((txtarea['selectionStart'] || txtarea['selectionStart'] == '0') ?
   			"ff" : (document['selection'] ? "ie" : false ) );
   		if (br == "ie") {
@@ -42,6 +55,7 @@ export class EditorComponent extends React.Component<Props, State> {
   		txtarea['value'] = front + text + back;
   		strPos = strPos + text.length;
   		if (br == "ie") {
+        // TODO: This is old IE consider removing this code
   			txtarea.focus();
   			var ieRange = document['selection'].createRange();
   			ieRange.moveStart ('character', -txtarea['value'].length);
