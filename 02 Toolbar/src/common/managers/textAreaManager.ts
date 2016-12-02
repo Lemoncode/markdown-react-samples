@@ -1,26 +1,33 @@
 
 // Based on: http://stackoverflow.com/questions/1064089/inserting-a-text-where-cursor-is-using-javascript-jquery
 class TextAreaManager {
-  insertAtCaret(textArea: HTMLTextAreaElement, text: string, offsetCursor : number = 0) {
-    const scrollPosition : number = textArea.scrollTop;
+  insertAtCaret(textArea: HTMLTextAreaElement, caret: string, offsetCursor : number = 0) {
 
-    let position = this.calculateTextAreaCurrentCursorPosition(textArea);
-    position = this.insertText(textArea, text, position);
+    this.insertCaretBetweenSelectedText(textArea, caret);
+    //TODO: Implement getPosition
+    const position = 1;
     this.placeCursor(textArea, position, offsetCursor);
-
-    textArea.scrollTop = scrollPosition;
   }
 
-  private calculateTextAreaCurrentCursorPosition(txtarea : HTMLTextAreaElement)
-  {
-      return txtarea.selectionStart;
+  private insertCaretBetweenSelectedText(textArea : HTMLTextAreaElement, caret: string) : void {
+    const beforeText = this.getTextBeforeSelectedText(textArea);
+    const selectedText = this.getSelectedText(textArea);
+    const afterText = this.getTextAfterSelectedText(textArea);
+
+    textArea.value = beforeText + caret + selectedText + caret + afterText;
+    // return (position + caret.length + 1);
   }
 
-  private insertText(textArea : HTMLTextAreaElement, text : string, position : number) : number {
-    var preText = (textArea.value).substring(0, position);
-    var postText = (textArea.value).substring(position, textArea.value.length);
-    textArea.value = preText + text + postText;
-    return (position + text.length);
+  private getTextBeforeSelectedText(textArea: HTMLTextAreaElement): string {
+    return (textArea.value).substring(0, textArea.selectionStart);
+  }
+
+  private getSelectedText(textArea: HTMLTextAreaElement): string {
+    return (textArea.value).substring(textArea.selectionStart, textArea.selectionEnd);
+  }
+
+  private getTextAfterSelectedText(textArea: HTMLTextAreaElement): string {
+    return (textArea.value).substring(textArea.selectionEnd, textArea.value.length);
   }
 
   private placeCursor(txtArea : HTMLTextAreaElement, position : number, offset : number)

@@ -22,7 +22,7 @@ export class EditorComponent extends React.Component<Props, State> {
   //https://facebook.github.io/react/docs/refs-and-the-dom.html
   onItalicText(event) {
     event.preventDefault();
-    textAreaManager.insertAtCaret(this.textArea, '**', 1);
+    textAreaManager.insertAtCaret(this.textArea, '*', 1);
   }
 
   onTextareaChange(event) {
@@ -36,18 +36,19 @@ export class EditorComponent extends React.Component<Props, State> {
       <div>
         <input type="submit" value="Italic" className="btn btn-default" onClick={this.onItalicText.bind(this)} />
         <div className='editor--container-flex'>
+          <div className="editor--edit-container">
+            <textarea
+              id="editor-viewer-text-area"
+              className='editor--textarea-size'
+              onChange={this.onTextareaChange.bind(this)}
+              ref={(textarea) => { this.textArea = textarea; }}
+              defaultValue={this.state.content}
+             >
+            </textarea>
+          </div>
+
          <div className='editor--viewer-border editor--viewer-container'>
            {this.state.content}
-         </div>
-         <div className="editor--edit-container">
-           <textarea
-             id="editor-viewer-text-area"
-             className='editor--textarea-size'
-             onChange={this.onTextareaChange.bind(this)}
-             ref={(textarea) => { this.textArea = textarea; }}
-             defaultValue={this.state.content}
-             >
-           </textarea>
          </div>
         </div>
       </div>
