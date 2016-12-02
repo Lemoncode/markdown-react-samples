@@ -45,8 +45,8 @@ export class EditorComponent extends React.Component<Props, State> {
              className='editor--textarea-size'
              onChange={this.onTextareaChange.bind(this)}
              ref={(textarea) => { this.textArea = textarea; }}
+             defaultValue={this.state.content}
              >
-             {this.state.content}
            </textarea>
          </div>
         </div>
