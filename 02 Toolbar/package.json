@@ -13,6 +13,7 @@
     "@types/react": "^0.14.52",
     "@types/react-dom": "^0.14.19",
     "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.24.1",
     "style-loader": "^0.13.1",
@@ -25,6 +26,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "markdown-to-react-components": "^0.2.2",
+    "prismjs": "^1.5.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   }

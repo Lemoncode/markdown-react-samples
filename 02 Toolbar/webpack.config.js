@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var basePath = __dirname;
 
@@ -10,14 +11,26 @@ module.exports = {
       extensions: ['', '.js', '.ts', '.tsx']
   },
 
-  entry: [
-    './main.tsx',
-    '../node_modules/bootstrap/dist/css/bootstrap.css',
-    './style.css'
-  ],
+  entry: {
+    app: './main.tsx',
+    styles: [
+      './style.css'
+    ],
+    vendor: [
+      'markdown-to-react-components',
+      'prismjs',
+      'react',
+      'react-dom'
+    ],
+    vendorStyles: [
+      '../node_modules/bootstrap/dist/css/bootstrap.css',
+      '../node_modules/prismjs/themes/prism.css',
+    ]
+  },
+
   output: {
     path: path.join(basePath, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
 
   devtool: 'source-map',
@@ -40,7 +53,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: ExtractTextPlugin.extract('style','css')
       },
       // Loading glyphicons => https://github.com/gowravshekar/bootstrap-webpack
       // Using here url-loader and file-loader
@@ -59,14 +72,12 @@ module.exports = {
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=10000&mimetype=image/svg+xml'
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
       }
     ]
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new ExtractTextPlugin('[name].css'),
     // Generate index.html in /dist => https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html', // Name of file in ./dist/
