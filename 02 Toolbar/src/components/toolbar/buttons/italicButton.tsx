@@ -32,8 +32,10 @@ export class ItalicButton extends React.Component<Props, {}> {
 
   render() {
     return (
-      <input type="submit" value="Italic" className="btn btn-default"
-        onClick={(e) => this.onItalicText(e)} />
+      <button type="button" className="btn btn-default"
+        onClick={(e) => this.onItalicText(e)}>
+        <span className="glyphicon glyphicon-italic"></span>
+      </button>
     );
   }
 }
