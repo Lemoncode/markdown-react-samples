@@ -2,6 +2,7 @@ import * as React from 'react';
 declare function require(name:string);
 const MTRC = require('markdown-to-react-components');
 import {textAreaManager} from './common/managers/textAreaManager';
+import {Toolbar} from './components/toolbar';
 
 interface Props {
 }
@@ -10,12 +11,11 @@ interface State {
   editorContent: string;
   viewerContent: string;
   shouldUpdateCursor: boolean;
+  textArea: HTMLTextAreaElement;
 }
 
 export class EditorComponent extends React.Component<Props, State> {
-  textArea : HTMLTextAreaElement;
-  offset: number;
-  cursorPosition: number;
+  textArea: HTMLTextAreaElement;
 
   constructor(props: Props) {
     super(props);
@@ -23,44 +23,45 @@ export class EditorComponent extends React.Component<Props, State> {
     this.state = {
       editorContent: 'test',
       viewerContent: 'test',
-      shouldUpdateCursor: false
+      shouldUpdateCursor: false,
+      textArea: null
     };
   }
 
-  componentDidUpdate() {
-    if (this.state.shouldUpdateCursor) {
-      textAreaManager.placeCursor(this.textArea, this.cursorPosition);
-    }
+  componentDidMount() {
+    this.setState({
+      editorContent: 'test',
+      viewerContent: 'test',
+      shouldUpdateCursor: false,
+      textArea: this.textArea
+    });
   }
 
-  //https://facebook.github.io/react/docs/refs-and-the-dom.html
-  onItalicText(event) {
-    event.preventDefault();
-    const caret = '**';
-    this.offset = 1;
-
-    this.cursorPosition = textAreaManager.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
-    const textWithCaret = textAreaManager.insertAtCaret(this.textArea, caret, this.offset);
-
+  onToolbarButtonClick(content: string) {
     this.setState({
-      editorContent: textWithCaret,
-      viewerContent: MTRC(textWithCaret).tree,
-      shouldUpdateCursor: true
+      editorContent: content,
+      viewerContent: MTRC(content).tree,
+      shouldUpdateCursor: true,
+      textArea: this.state.textArea
     });
   }
 
   onTextareaChange(event) {
-      this.setState({
-        editorContent: event.target.value,
-        viewerContent: MTRC(event.target.value).tree,
-        shouldUpdateCursor: false
-      });
+    this.setState({
+      editorContent: event.target.value,
+      viewerContent: MTRC(event.target.value).tree,
+      shouldUpdateCursor: false,
+      textArea: this.state.textArea
+    });
   }
 
   render() {
     return (
       <div>
-        <input type="submit" value="Italic" className="btn btn-default" onClick={this.onItalicText.bind(this)} />
+        <Toolbar textArea={this.state.textArea}
+          updateTextArea={this.onToolbarButtonClick.bind(this)}
+          shouldUpdateCursor={this.state.shouldUpdateCursor} />
+
         <div className='editor--container-flex'>
           <div className="editor--edit-container">
             <textarea

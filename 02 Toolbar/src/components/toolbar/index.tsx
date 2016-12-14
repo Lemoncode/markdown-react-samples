@@ -7,7 +7,7 @@ interface Props {
   shouldUpdateCursor: boolean;
 }
 
-const Toolbar = (props: Props) => {
+export const Toolbar = (props: Props) => {
   return (
     <div className="btn-toolbar">
       <div className="btn-group">

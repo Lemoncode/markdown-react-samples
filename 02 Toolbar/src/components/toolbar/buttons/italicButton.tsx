@@ -9,7 +9,7 @@ interface Props {
   shouldUpdateCursor: boolean;
 }
 
-export class ItalicButton extends React.Component<Props,{}> {
+export class ItalicButton extends React.Component<Props, {}> {
   cursorPosition: number;
 
   componentDidUpdate() {
@@ -17,7 +17,7 @@ export class ItalicButton extends React.Component<Props,{}> {
       textAreaManager.placeCursor(this.props.textArea, this.cursorPosition);
     }
   }
-  
+
   onItalicText(event) {
     event.preventDefault();
 
