@@ -20,7 +20,8 @@ module.exports = {
       'markdown-to-react-components',
       'prismjs',
       'react',
-      'react-dom'
+      'react-dom',
+      "core-js"
     ],
     vendorStyles: [
       '../node_modules/bootstrap/dist/css/bootstrap.css',

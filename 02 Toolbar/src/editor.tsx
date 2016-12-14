@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {} from 'core-js';
 declare function require(name:string);
 const MTRC = require('markdown-to-react-components');
 import {textAreaManager} from './common/managers/textAreaManager';
@@ -29,30 +30,30 @@ export class EditorComponent extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.setState({
-      editorContent: 'test',
-      viewerContent: 'test',
-      shouldUpdateCursor: false,
+    const newState = Object.assign({}, this.state, {
       textArea: this.textArea
     });
+
+    this.setState(newState);
   }
 
   onToolbarButtonClick(content: string) {
-    this.setState({
+    const newState = Object.assign({}, this.state, {
       editorContent: content,
       viewerContent: MTRC(content).tree,
-      shouldUpdateCursor: true,
-      textArea: this.state.textArea
+      shouldUpdateCursor: true
     });
+
+    this.setState(newState);
   }
 
   onTextareaChange(event) {
-    this.setState({
+    const newState = Object.assign({}, this.state, {
       editorContent: event.target.value,
-      viewerContent: MTRC(event.target.value).tree,
-      shouldUpdateCursor: false,
-      textArea: this.state.textArea
+      viewerContent: MTRC(event.target.value).tree
     });
+
+    this.setState(newState);
   }
 
   render() {
