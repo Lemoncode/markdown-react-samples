@@ -25,21 +25,21 @@ export class EditorComponent extends React.Component<Props, State> {
       viewerContent: 'test',
       shouldUpdateCursor: false
     };
-
-    this.offset = 1;
   }
 
   componentDidUpdate() {
     if (this.state.shouldUpdateCursor) {
-      textAreaManager.placeCursor(this.textArea, this.cursorPosition, this.offset);
+      textAreaManager.placeCursor(this.textArea, this.cursorPosition);
     }
   }
 
   //https://facebook.github.io/react/docs/refs-and-the-dom.html
   onItalicText(event) {
     event.preventDefault();
-    const caret = '*';
-    this.cursorPosition = textAreaManager.getPositionAfterCaret(this.textArea, caret);
+    const caret = '**';
+    this.offset = 1;
+
+    this.cursorPosition = textAreaManager.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
     const textWithCaret = textAreaManager.insertAtCaret(this.textArea, caret, this.offset);
 
     this.setState({
