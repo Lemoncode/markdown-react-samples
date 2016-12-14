@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   ToolbarButton, ItalicButton, BoldButton, HeaderButton,
-  QuoteButton, CodeButton
+  QuoteButton, CodeButton, LinkButton
 } from './buttons';
 
 interface Props {
@@ -57,7 +57,7 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <ItalicButton />
+          <LinkButton />
         </ToolbarButton>
       </div>
     </div>

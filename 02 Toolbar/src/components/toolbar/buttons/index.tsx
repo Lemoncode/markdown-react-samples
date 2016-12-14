@@ -4,6 +4,7 @@ import {BoldButton} from './boldButton';
 import {HeaderButton} from './headerButton';
 import {QuoteButton} from './quoteButton';
 import {CodeButton} from './codeButton';
+import {LinkButton} from './linkButton';
 
 export {
   ToolbarButton,
@@ -11,5 +12,6 @@ export {
   BoldButton,
   HeaderButton,
   QuoteButton,
-  CodeButton
+  CodeButton,
+  LinkButton
 }
