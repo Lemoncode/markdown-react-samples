@@ -7,27 +7,37 @@ interface Props {
 }
 
 interface State {
-  content : string;
+  editorContent: string;
+  viewerContent: string;
 }
 
 export class EditorComponent extends React.Component<Props, State> {
-  textArea : any;
+  textArea : HTMLTextAreaElement;
 
   constructor(props: Props) {
     super(props);
 
-    this.state = {content: 'test'};
+    this.state = {
+      editorContent: 'test',
+      viewerContent: 'test'
+    };
   }
 
   //https://facebook.github.io/react/docs/refs-and-the-dom.html
   onItalicText(event) {
     event.preventDefault();
-    textAreaManager.insertAtCaret(this.textArea, '*', 1);
+    const textWithCaret = textAreaManager.insertAtCaret(this.textArea, '*', 1);
+
+    this.setState({
+      editorContent: textWithCaret,
+      viewerContent: MTRC(textWithCaret).tree
+    });
   }
 
   onTextareaChange(event) {
       this.setState({
-        content: MTRC(event.target.value).tree
+        editorContent: event.target.value,
+        viewerContent: MTRC(event.target.value).tree
       });
   }
 
@@ -42,13 +52,13 @@ export class EditorComponent extends React.Component<Props, State> {
               className='editor--textarea-size'
               onChange={this.onTextareaChange.bind(this)}
               ref={(textarea) => { this.textArea = textarea; }}
-              defaultValue={this.state.content}
+              value={this.state.editorContent}
              >
             </textarea>
           </div>
 
          <div className='editor--viewer-border editor--viewer-container'>
-           {this.state.content}
+           {this.state.viewerContent}
          </div>
         </div>
       </div>
