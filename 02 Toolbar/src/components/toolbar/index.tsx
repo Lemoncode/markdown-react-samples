@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   ToolbarButton, ItalicButton, BoldButton, HeaderButton,
-  QuoteButton
+  QuoteButton, CodeButton
 } from './buttons';
 
 interface Props {
@@ -50,7 +50,7 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <BoldButton />
+          <CodeButton />
         </ToolbarButton>
 
         <ToolbarButton textArea={props.textArea} caret="[](url)" offset={1}
