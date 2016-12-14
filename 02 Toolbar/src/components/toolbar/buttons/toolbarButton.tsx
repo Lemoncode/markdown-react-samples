@@ -5,29 +5,28 @@ interface Props {
   textArea: HTMLTextAreaElement;
   caret: string;
   offset: number;
-  updateTextArea: (content: string) => void;
+  updateTextArea: (content: string, cursorPosition: number) => void;
   shouldUpdateCursor: boolean;
+  cursorPosition: number;
 }
 
 export class ToolbarButton extends React.Component<Props, {}> {
-  cursorPosition: number;
-
   componentDidUpdate() {
     if (this.props.shouldUpdateCursor) {
-      textAreaManager.placeCursor(this.props.textArea, this.cursorPosition);
+      textAreaManager.placeCursor(this.props.textArea, this.props.cursorPosition);
     }
   }
 
   onClick(event) {
     event.preventDefault();
 
-    this.cursorPosition = textAreaManager.caculateCaretStartCursorPosition(
+    const cursorPosition = textAreaManager.caculateCaretStartCursorPosition(
       this.props.textArea, this.props.caret, this.props.offset);
 
     const textWithCaret = textAreaManager.insertAtCaret(this.props.textArea,
       this.props.caret, this.props.offset);
 
-    this.props.updateTextArea(textWithCaret);
+    this.props.updateTextArea(textWithCaret, cursorPosition);
   }
 
   render() {

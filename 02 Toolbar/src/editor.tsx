@@ -13,6 +13,7 @@ interface State {
   viewerContent: string;
   shouldUpdateCursor: boolean;
   textArea: HTMLTextAreaElement;
+  cursorPosition: number;
 }
 
 export class EditorComponent extends React.Component<Props, State> {
@@ -25,7 +26,8 @@ export class EditorComponent extends React.Component<Props, State> {
       editorContent: 'test',
       viewerContent: 'test',
       shouldUpdateCursor: false,
-      textArea: null
+      textArea: null,
+      cursorPosition: 0
     };
   }
 
@@ -37,11 +39,12 @@ export class EditorComponent extends React.Component<Props, State> {
     this.setState(newState);
   }
 
-  onToolbarButtonClick(content: string) {
+  onToolbarButtonClick(content: string, cursorPosition: number) {
     const newState = Object.assign({}, this.state, {
       editorContent: content,
       viewerContent: MTRC(content).tree,
-      shouldUpdateCursor: true
+      shouldUpdateCursor: true,
+      cursorPosition: cursorPosition
     });
 
     this.setState(newState);
@@ -50,7 +53,8 @@ export class EditorComponent extends React.Component<Props, State> {
   onTextareaChange(event) {
     const newState = Object.assign({}, this.state, {
       editorContent: event.target.value,
-      viewerContent: MTRC(event.target.value).tree
+      viewerContent: MTRC(event.target.value).tree,
+      shouldUpdateCursor: false
     });
 
     this.setState(newState);
@@ -61,7 +65,8 @@ export class EditorComponent extends React.Component<Props, State> {
       <div>
         <Toolbar textArea={this.state.textArea}
           updateTextArea={this.onToolbarButtonClick.bind(this)}
-          shouldUpdateCursor={this.state.shouldUpdateCursor} />
+          shouldUpdateCursor={this.state.shouldUpdateCursor}
+          cursorPosition={this.state.cursorPosition} />
 
         <div className='editor--container-flex'>
           <div className="editor--edit-container">
