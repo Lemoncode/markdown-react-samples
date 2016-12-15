@@ -57,4 +57,4 @@ class TextAreaUtil {
   }
 }
 
-export const textAreaUtil = new TextAreaUtil();
+export const textAreaTool = new TextAreaUtil();
