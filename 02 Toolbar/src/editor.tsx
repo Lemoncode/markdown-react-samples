@@ -1,7 +1,7 @@
 import * as React from 'react';
 declare function require(name:string);
 const MTRC = require('markdown-to-react-components');
-import {textAreaManager} from './common/managers/textAreaManager';
+import {textAreaTool} from './common/ui/tools/textAreaTool';
 
 interface Props {
 }
@@ -22,7 +22,7 @@ export class EditorComponent extends React.Component<Props, State> {
 
 //Note: Don't indent text to avoid bad formatted markdown.
     const defaultContent = `# This is a demo text
-Where **You** can write *lists*:
+Where **you** can write *lists*:
 - Item 1
 - Item 2
 
@@ -37,7 +37,7 @@ And more...`;
 
   componentDidUpdate() {
     if (this.state.shouldUpdateCursor) {
-      textAreaManager.placeCursor(this.textArea, this.cursorPosition);
+      textAreaTool.placeCursor(this.textArea, this.cursorPosition);
     }
   }
 
@@ -47,8 +47,8 @@ And more...`;
     const caret = '**';
     this.offset = 1;
 
-    this.cursorPosition = textAreaManager.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
-    const textWithCaret = textAreaManager.insertAtCaret(this.textArea, caret, this.offset);
+    this.cursorPosition = textAreaTool.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
+    const textWithCaret = textAreaTool.insertAtCaret(this.textArea, caret, this.offset);
 
     this.setState({
       editorContent: textWithCaret,
