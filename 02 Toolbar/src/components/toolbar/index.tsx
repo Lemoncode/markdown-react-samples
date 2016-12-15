@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {BaseToolbarButton, LinkToolbarButton} from './buttons';
 import {
-  ItalicIcon, BoldIcon, HeaderIcon, QuoteIcon, CodeIcon, LinkIcon
+  ItalicIcon, BoldIcon, HeaderIcon, QuoteIcon, CodeIcon, LinkIcon,
+  BulletedListIcon
 } from './icons';
 
 interface Props {
@@ -47,6 +48,13 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}>
           <LinkIcon />
         </LinkToolbarButton>
+      </div>
+
+      <div className="btn-group">
+        <BaseToolbarButton textArea={props.textArea} caret="\n - " offset={4}
+          updateTextArea={props.updateTextArea}>
+          <BulletedListIcon />
+        </BaseToolbarButton>
       </div>
     </div>
   );

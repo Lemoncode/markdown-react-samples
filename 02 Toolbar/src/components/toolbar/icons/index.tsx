@@ -4,6 +4,7 @@ import {HeaderIcon} from './headerIcon';
 import {QuoteIcon} from './quoteIcon';
 import {CodeIcon} from './codeIcon';
 import {LinkIcon} from './linkIcon';
+import {BulletedListIcon} from './bulletedListIcon';
 
 export {
   ItalicIcon,
@@ -11,5 +12,6 @@ export {
   HeaderIcon,
   QuoteIcon,
   CodeIcon,
-  LinkIcon
+  LinkIcon,
+  BulletedListIcon
 }
