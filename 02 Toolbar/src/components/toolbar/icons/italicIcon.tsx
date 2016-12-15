@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const ItalicButton = () => {
+export const ItalicIcon = () => {
   return (
     <span className="glyphicon glyphicon-italic"></span>
   );

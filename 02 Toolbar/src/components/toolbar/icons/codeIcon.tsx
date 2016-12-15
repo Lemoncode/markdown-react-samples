@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const CodeButton = () => {
+export const CodeIcon = () => {
   return (
     <div>
       <span className="glyphicon glyphicon-menu-left"></span>

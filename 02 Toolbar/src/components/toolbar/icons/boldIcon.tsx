@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const BoldButton = () => {
+export const BoldIcon = () => {
   return (
     <span className="glyphicon glyphicon-bold"></span>
   );

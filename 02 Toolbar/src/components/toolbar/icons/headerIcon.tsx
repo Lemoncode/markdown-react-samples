@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const HeaderButton = () => {
+export const HeaderIcon = () => {
   return (
     <span className="glyphicon glyphicon-header"></span>
   );

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const LinkButton = () => {
+export const LinkIcon = () => {
   return (
     <span className="glyphicon glyphicon-link"></span>
   );

@@ -1,8 +1,8 @@
 import * as React from 'react';
+import {ToolbarButton} from './buttons';
 import {
-  ToolbarButton, ItalicButton, BoldButton, HeaderButton,
-  QuoteButton, CodeButton, LinkButton
-} from './buttons';
+  ItalicIcon, BoldIcon, HeaderIcon, QuoteIcon, CodeIcon, LinkIcon
+} from './icons';
 
 interface Props {
   textArea: HTMLTextAreaElement;
@@ -20,21 +20,21 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <HeaderButton />
+          <HeaderIcon />
         </ToolbarButton>
 
         <ToolbarButton textArea={props.textArea} caret="****" offset={2}
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <BoldButton />
+          <BoldIcon />
         </ToolbarButton>
 
         <ToolbarButton textArea={props.textArea} caret="**" offset={1}
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <ItalicButton />
+          <ItalicIcon />
         </ToolbarButton>
       </div>
 
@@ -43,21 +43,21 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <QuoteButton />
+          <QuoteIcon />
         </ToolbarButton>
 
         <ToolbarButton textArea={props.textArea} caret="``" offset={1}
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <CodeButton />
+          <CodeIcon />
         </ToolbarButton>
 
         <ToolbarButton textArea={props.textArea} caret="[](url)" offset={1}
           updateTextArea={props.updateTextArea}
           shouldUpdateCursor={props.shouldUpdateCursor}
           cursorPosition={props.cursorPosition}>
-          <LinkButton />
+          <LinkIcon />
         </ToolbarButton>
       </div>
     </div>
