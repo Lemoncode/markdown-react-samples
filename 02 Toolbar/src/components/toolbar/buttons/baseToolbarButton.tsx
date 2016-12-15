@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {textAreaManager} from '../../../common/managers/textAreaManager';
+import {textAreaTool} from '../../../common/ui/tools/textAreaTool';
 
 interface Props {
   textArea: HTMLTextAreaElement;
@@ -18,10 +18,10 @@ export class BaseToolbarButton extends React.Component<Props, {}> {
         cursorStartPosition = this.props.cursorStartPosition;
     }
 
-    const cursorPosition = textAreaManager.caculateCaretStartCursorPosition(
+    const cursorPosition = textAreaTool.caculateCaretStartCursorPosition(
       this.props.textArea, this.props.caret, cursorStartPosition);
 
-    const textWithCaret = textAreaManager.insertAtCaret(this.props.textArea,
+    const textWithCaret = textAreaTool.insertAtCaretGetText(this.props.textArea,
       this.props.caret, this.props.offset);
 
     this.props.updateTextArea(textWithCaret, cursorPosition);

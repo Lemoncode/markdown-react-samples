@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {textAreaManager} from '../../../common/managers/textAreaManager';
+import {textAreaTool} from '../../../common/ui/tools/textAreaTool';
 import {BaseToolbarButton} from './baseToolbarButton';
 
 export class LinkToolbarButton extends BaseToolbarButton {
   onClick(event) {
     event.preventDefault();
 
-    const textWithCaret = textAreaManager.insertAtCaret(this.props.textArea,
+    const textWithCaret = textAreaTool.insertAtCaretGetText(this.props.textArea,
       this.props.caret, this.props.offset);
     const cursorStartPosition = this.getCursorStartPosition();
     const cursorEndPosition = this.getCursorEndPosition();
@@ -15,26 +15,26 @@ export class LinkToolbarButton extends BaseToolbarButton {
   }
 
   private getCursorStartPosition(): number {
-    return textAreaManager.hasSelectedText(this.props.textArea) ?
+    return textAreaTool.hasSelectedText(this.props.textArea) ?
       this.getCursorStartPositionForSelectedText() :
-      textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.offset);
+      textAreaTool.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.offset);
   }
 
   private getCursorStartPositionForSelectedText(): number {
     return this.props.cursorStartPosition > 0 ?
-      textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition) :
-      textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition);
+      textAreaTool.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition) :
+      textAreaTool.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition);
   }
 
   private getCursorEndPosition(): number {
-    return textAreaManager.hasSelectedText(this.props.textArea) ?
+    return textAreaTool.hasSelectedText(this.props.textArea) ?
       this.getCursorEndPositionForSelectedText() :
       null;
   }
 
   private getCursorEndPositionForSelectedText(): number {
     return this.props.cursorEndPosition > 0 ?
-    textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition) :
-    textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition);
+    textAreaTool.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition) :
+    textAreaTool.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition);
   }
 }

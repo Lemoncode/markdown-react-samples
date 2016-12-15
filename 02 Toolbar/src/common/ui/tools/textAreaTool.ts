@@ -1,7 +1,7 @@
 
 // Based on: http://stackoverflow.com/questions/1064089/inserting-a-text-where-cursor-is-using-javascript-jquery
-class TextAreaManager {
-  insertAtCaret(textArea: HTMLTextAreaElement, caret: string, offsetCursor: number = 0): string {
+class TextAreaTool {
+  insertAtCaretGetText(textArea: HTMLTextAreaElement, caret: string, offsetCursor: number = 0): string {
     return this.buildTextWithCaretBetweenSelectedText(textArea, caret, offsetCursor);
   }
 
@@ -71,4 +71,4 @@ class TextAreaManager {
   }
 }
 
-export const textAreaManager = new TextAreaManager();
+export const textAreaTool = new TextAreaTool();

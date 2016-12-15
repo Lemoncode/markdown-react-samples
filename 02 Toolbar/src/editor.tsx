@@ -2,7 +2,7 @@ import * as React from 'react';
 import {} from 'core-js';
 declare function require(name:string);
 const MTRC = require('markdown-to-react-components');
-import {textAreaManager} from './common/managers/textAreaManager';
+import {textAreaTool} from './common/ui/tools/textAreaTool';
 import {Toolbar} from './components/toolbar';
 
 interface Props {
@@ -23,9 +23,17 @@ export class EditorComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+//Note: Don't indent text to avoid bad formatted markdown.
+    const defaultContent = `# This is a demo text
+Where **you** can write *lists*:
+- Item 1
+- Item 2
+
+And more...`;
+
     this.state = {
-      editorContent: 'test',
-      viewerContent: 'test',
+      editorContent: defaultContent,
+      viewerContent: MTRC(defaultContent).tree,
       shouldUpdateCursor: false,
       textArea: null
     };
@@ -41,7 +49,7 @@ export class EditorComponent extends React.Component<Props, State> {
 
   componentDidUpdate() {
     if (this.state.shouldUpdateCursor) {
-      textAreaManager.placeCursor(this.state.textArea, this.cursorStartPosition, this.cursorEndPosition);
+      textAreaTool.placeCursor(this.state.textArea, this.cursorStartPosition, this.cursorEndPosition);
     }
   }
 
