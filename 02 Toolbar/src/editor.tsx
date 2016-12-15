@@ -20,9 +20,17 @@ export class EditorComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+//Note: Don't indent text to avoid bad formatted markdown.
+    const defaultContent = `# This is a demo text
+Where **You** can write *lists*:
+- Item 1
+- Item 2
+
+And more...`;
+
     this.state = {
-      editorContent: 'test',
-      viewerContent: 'test',
+      editorContent: defaultContent,
+      viewerContent: MTRC(defaultContent).tree,
       shouldUpdateCursor: false
     };
   }
