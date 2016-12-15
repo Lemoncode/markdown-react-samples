@@ -1,19 +1,21 @@
-import {ItalicIcon} from './italicIcon';
 import {BoldIcon} from './boldIcon';
-import {HeaderIcon} from './headerIcon';
-import {QuoteIcon} from './quoteIcon';
-import {CodeIcon} from './codeIcon';
-import {LinkIcon} from './linkIcon';
 import {BulletedListIcon} from './bulletedListIcon';
+import {CodeIcon} from './codeIcon';
+import {HeaderIcon} from './headerIcon';
+import {ImageIcon} from './imageIcon';
+import {ItalicIcon} from './italicIcon';
+import {LinkIcon} from './linkIcon';
 import {NumberedListIcon} from './numberedListIcon';
+import {QuoteIcon} from './quoteIcon';
 
 export {
-  ItalicIcon,
   BoldIcon,
-  HeaderIcon,
-  QuoteIcon,
-  CodeIcon,
-  LinkIcon,
   BulletedListIcon,
-  NumberedListIcon
+  CodeIcon,
+  HeaderIcon,
+  ImageIcon,
+  ItalicIcon,
+  LinkIcon,
+  NumberedListIcon,
+  QuoteIcon
 }

@@ -16,13 +16,25 @@ export class LinkToolbarButton extends BaseToolbarButton {
 
   private getCursorStartPosition(): number {
     return textAreaManager.hasSelectedText(this.props.textArea) ?
-      textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition) :
+      this.getCursorStartPositionForSelectedText() :
       textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.offset);
+  }
+
+  private getCursorStartPositionForSelectedText(): number {
+    return this.props.cursorStartPosition > 0 ?
+      textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition) :
+      textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorStartPosition);
   }
 
   private getCursorEndPosition(): number {
     return textAreaManager.hasSelectedText(this.props.textArea) ?
-      textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition) :
+      this.getCursorEndPositionForSelectedText() :
       null;
+  }
+
+  private getCursorEndPositionForSelectedText(): number {
+    return this.props.cursorEndPosition > 0 ?
+    textAreaManager.caculateCaretStartCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition) :
+    textAreaManager.caculateCaretEndCursorPosition(this.props.textArea, this.props.caret, this.props.cursorEndPosition);
   }
 }

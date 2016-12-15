@@ -2,7 +2,7 @@ import * as React from 'react';
 import {BaseToolbarButton, LinkToolbarButton} from './buttons';
 import {
   ItalicIcon, BoldIcon, HeaderIcon, QuoteIcon, CodeIcon, LinkIcon,
-  BulletedListIcon, NumberedListIcon
+  BulletedListIcon, NumberedListIcon, ImageIcon
 } from './icons';
 
 interface Props {
@@ -43,6 +43,13 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}>
           <LinkIcon />
         </LinkToolbarButton>
+
+        <LinkToolbarButton textArea={props.textArea} caret="![alt text]()" offset={12}
+          cursorStartPosition={2}
+          cursorEndPosition={10}
+          updateTextArea={props.updateTextArea}>
+          <ImageIcon />
+        </LinkToolbarButton>
       </div>
 
       <div className="btn-group">
@@ -55,7 +62,7 @@ export const Toolbar = (props: Props) => {
           updateTextArea={props.updateTextArea}>
           <NumberedListIcon />
         </BaseToolbarButton>
-        
+
         <BaseToolbarButton textArea={props.textArea} caret="> " offset={2}
           updateTextArea={props.updateTextArea}>
           <QuoteIcon />
