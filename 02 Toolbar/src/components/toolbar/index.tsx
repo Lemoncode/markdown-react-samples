@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ToolbarButton} from './buttons';
+import {BaseToolbarButton, LinkToolbarButton} from './buttons';
 import {
   ItalicIcon, BoldIcon, HeaderIcon, QuoteIcon, CodeIcon, LinkIcon
 } from './icons';
@@ -7,8 +7,6 @@ import {
 interface Props {
   textArea: HTMLTextAreaElement;
   updateTextArea: (content: string, cursorPosition: number) => void;
-  shouldUpdateCursor: boolean;
-  cursorPosition: number;
 }
 
 export const Toolbar = (props: Props) => {
@@ -16,49 +14,39 @@ export const Toolbar = (props: Props) => {
   return (
     <div className="btn-toolbar">
       <div className="btn-group">
-        <ToolbarButton textArea={props.textArea} caret="#" offset={1}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <BaseToolbarButton textArea={props.textArea} caret="#" offset={1}
+          updateTextArea={props.updateTextArea}>
           <HeaderIcon />
-        </ToolbarButton>
+        </BaseToolbarButton>
 
-        <ToolbarButton textArea={props.textArea} caret="****" offset={2}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <BaseToolbarButton textArea={props.textArea} caret="****" offset={2}
+          updateTextArea={props.updateTextArea}>
           <BoldIcon />
-        </ToolbarButton>
+        </BaseToolbarButton>
 
-        <ToolbarButton textArea={props.textArea} caret="**" offset={1}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <BaseToolbarButton textArea={props.textArea} caret="**" offset={1}
+          updateTextArea={props.updateTextArea}>
           <ItalicIcon />
-        </ToolbarButton>
+        </BaseToolbarButton>
       </div>
 
       <div className="btn-group">
-        <ToolbarButton textArea={props.textArea} caret="> " offset={2}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <BaseToolbarButton textArea={props.textArea} caret="> " offset={2}
+          updateTextArea={props.updateTextArea}>
           <QuoteIcon />
-        </ToolbarButton>
+        </BaseToolbarButton>
 
-        <ToolbarButton textArea={props.textArea} caret="``" offset={1}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <BaseToolbarButton textArea={props.textArea} caret="``" offset={1}
+          updateTextArea={props.updateTextArea}>
           <CodeIcon />
-        </ToolbarButton>
+        </BaseToolbarButton>
 
-        <ToolbarButton textArea={props.textArea} caret="[](url)" offset={1}
-          updateTextArea={props.updateTextArea}
-          shouldUpdateCursor={props.shouldUpdateCursor}
-          cursorPosition={props.cursorPosition}>
+        <LinkToolbarButton textArea={props.textArea} caret="[](url)" offset={1}
+          cursorStartPosition={-4}
+          cursorEndPosition={-1}
+          updateTextArea={props.updateTextArea}>
           <LinkIcon />
-        </ToolbarButton>
+        </LinkToolbarButton>
       </div>
     </div>
   );

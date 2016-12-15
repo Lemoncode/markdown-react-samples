@@ -13,11 +13,12 @@ interface State {
   viewerContent: string;
   shouldUpdateCursor: boolean;
   textArea: HTMLTextAreaElement;
-  cursorPosition: number;
 }
 
 export class EditorComponent extends React.Component<Props, State> {
   textArea: HTMLTextAreaElement;
+  cursorStartPosition: number;
+  cursorEndPosition: number;
 
   constructor(props: Props) {
     super(props);
@@ -26,8 +27,7 @@ export class EditorComponent extends React.Component<Props, State> {
       editorContent: 'test',
       viewerContent: 'test',
       shouldUpdateCursor: false,
-      textArea: null,
-      cursorPosition: 0
+      textArea: null
     };
   }
 
@@ -39,15 +39,22 @@ export class EditorComponent extends React.Component<Props, State> {
     this.setState(newState);
   }
 
-  onToolbarButtonClick(content: string, cursorPosition: number) {
+  componentDidUpdate() {
+    if (this.state.shouldUpdateCursor) {
+      textAreaManager.placeCursor(this.state.textArea, this.cursorStartPosition, this.cursorEndPosition);
+    }
+  }
+
+  onToolbarButtonClick(content: string, cursorStartPosition?: number, cursorEndPosition?: number) {
     const newState = Object.assign({}, this.state, {
       editorContent: content,
       viewerContent: MTRC(content).tree,
-      shouldUpdateCursor: true,
-      cursorPosition: cursorPosition
+      shouldUpdateCursor: true
     });
 
     this.setState(newState);
+    this.cursorStartPosition = cursorStartPosition;
+    this.cursorEndPosition = cursorEndPosition;
   }
 
   onTextareaChange(event) {
@@ -64,9 +71,7 @@ export class EditorComponent extends React.Component<Props, State> {
     return (
       <div>
         <Toolbar textArea={this.state.textArea}
-          updateTextArea={this.onToolbarButtonClick.bind(this)}
-          shouldUpdateCursor={this.state.shouldUpdateCursor}
-          cursorPosition={this.state.cursorPosition} />
+          updateTextArea={this.onToolbarButtonClick.bind(this)} />
 
         <div className='editor--container-flex'>
           <div className="editor--edit-container">
@@ -75,8 +80,7 @@ export class EditorComponent extends React.Component<Props, State> {
               className='editor--textarea-size'
               onChange={this.onTextareaChange.bind(this)}
               ref={(textarea) => { this.textArea = textarea; }}
-              value={this.state.editorContent}
-             >
+              value={this.state.editorContent}>
             </textarea>
           </div>
 

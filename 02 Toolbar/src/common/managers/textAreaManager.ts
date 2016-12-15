@@ -36,24 +36,30 @@ class TextAreaManager {
   }
 
   public caculateCaretStartCursorPosition(textArea: HTMLTextAreaElement, caret: string, offsetCursor: number): number {
-    const caretStart = this.getCaretStart(caret, offsetCursor);
+    const caretStart = this.getCaretStart(caret, 0);
 
-    return (textArea.selectionStart + caretStart.length);
+    return (textArea.selectionStart + caretStart.length + offsetCursor);
   }
 
   public caculateCaretEndCursorPosition(textArea: HTMLTextAreaElement, caret: string, offsetCursor: number): number {
-    const caretStart = this.getCaretStart(caret, offsetCursor);
+    const caretStart = this.getCaretStart(caret, 0);
     const selectedText = this.getSelectedText(textArea);
-    const caretEnd = this.getCaretEnd(caret, offsetCursor);
+    const caretEnd = this.getCaretEnd(caret, 0);
 
-    return (textArea.selectionStart + caretStart.length + selectedText.length + caretEnd.length);
+    return (textArea.selectionStart + caretStart.length + selectedText.length + caretEnd.length + offsetCursor);
   }
 
-  public placeCursor(textArea : HTMLTextAreaElement, position : number, offsetStart: number = 0, offsetEnd: number = 0)
+  public placeCursor(textArea : HTMLTextAreaElement, selectionStart : number = 0, selectionEnd: number = selectionStart)
   {
-    textArea.selectionStart = position + offsetStart;
-    textArea.selectionEnd = position + offsetEnd;
+    textArea.selectionStart = selectionStart;
+    textArea.selectionEnd = selectionEnd;
     textArea.focus();
+  }
+
+  public hasSelectedText(textArea: HTMLTextAreaElement): boolean {
+    const selectedText = this.getSelectedText(textArea);
+
+    return selectedText.length > 0;
   }
 }
 
