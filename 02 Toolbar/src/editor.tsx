@@ -48,7 +48,7 @@ And more...`;
     this.offset = 1;
 
     this.cursorPosition = textAreaTool.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
-    const textWithCaret = textAreaTool.insertAtCaret(this.textArea, caret, this.offset);
+    const textWithCaret = textAreaTool.insertAtCaretGetText(this.textArea, caret, this.offset);
 
     this.setState({
       editorContent: textWithCaret,
