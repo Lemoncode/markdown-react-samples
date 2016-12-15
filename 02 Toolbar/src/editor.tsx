@@ -1,7 +1,7 @@
 import * as React from 'react';
 declare function require(name:string);
 const MTRC = require('markdown-to-react-components');
-import {textAreaTool} from './common/ui/tools/textAreaTool';
+import {textAreaUtil} from './common/ui/utils/textAreaUtil';
 
 interface Props {
 }
@@ -37,7 +37,7 @@ And more...`;
 
   componentDidUpdate() {
     if (this.state.shouldUpdateCursor) {
-      textAreaTool.placeCursor(this.textArea, this.cursorPosition);
+      textAreaUtil.placeCursor(this.textArea, this.cursorPosition);
     }
   }
 
@@ -47,8 +47,8 @@ And more...`;
     const caret = '**';
     this.offset = 1;
 
-    this.cursorPosition = textAreaTool.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
-    const textWithCaret = textAreaTool.insertAtCaret(this.textArea, caret, this.offset);
+    this.cursorPosition = textAreaUtil.caculateCaretStartCursorPosition(this.textArea, caret, this.offset);
+    const textWithCaret = textAreaUtil.insertAtCaret(this.textArea, caret, this.offset);
 
     this.setState({
       editorContent: textWithCaret,
